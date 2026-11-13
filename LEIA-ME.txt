@@ -1,0 +1,198 @@
+FATEC ID — GUIA DE ESTUDO E APRESENTAÇÃO
+JavaScript: da teoria à aplicação prática
+==================================================
+
+Este projeto é uma aplicação única de gerenciamento de tarefas de estudo. O objetivo é demonstrar, de maneira integrada, os conteúdos dos slides de JavaScript por meio de uma interface que pode ser utilizada ao vivo durante a apresentação.
+
+O FATEC ID permite:
+- cadastrar tarefas e escolher a prioridade;
+- marcar tarefas como concluídas ou reabri-las;
+- excluir tarefas;
+- pesquisar e filtrar tarefas;
+- acompanhar a porcentagem de conclusão;
+- alternar entre tema claro e escuro;
+- manter tarefas e tema salvos no navegador.
+
+COMO ABRIR
+1. Extraia o arquivo ZIP.
+2. Abra a pasta FATEC_ID.
+3. Dê dois cliques em index.html.
+4. O site abre no navegador. Não é necessária instalação ou conexão com banco de dados.
+5. Para apresentar, role até “Como o projeto funciona?” e selecione a aba do integrante.
+
+ARQUIVOS
+- index.html: estrutura HTML, formulário, painel de tarefas e abas de apresentação.
+- style.css: aparência, responsividade, estados de tarefa e tema escuro.
+- app.js: cadastro, conclusão, exclusão, filtros, eventos, progresso e localStorage.
+- LEIA-ME.txt: guia de apoio para o grupo.
+
+COMO CONCLUIR UMA TAREFA
+1. Digite uma tarefa e clique em “Adicionar tarefa”.
+2. Na linha da tarefa, clique no botão “Concluir”.
+3. O botão muda para “Concluída ✓”, o texto fica riscado e a barra de progresso é atualizada.
+4. Para desfazer, clique novamente em “Concluída ✓”; a tarefa volta ao estado pendente.
+5. O status também é salvo no localStorage, então continua após atualizar a página.
+
+COMO O PROGRESSO É CALCULADO
+O sistema conta quantas tarefas têm completed igual a true. A porcentagem é:
+(tarefas concluídas ÷ total de tarefas) × 100.
+Se não houver tarefas, o progresso é 0%.
+
+ROTEIRO DOS INTEGRANTES
+A divisão segue a imagem enviada: Ryan páginas 2–4; Amanda 5–6; Breno 7–8; Marcos 9–10; Lari 11–13; Bruno 14–16. A capa e a conclusão podem ser conduzidas coletivamente.
+
+1. RYAN — FUNDAMENTOS DA WEB (PÁGINAS 2 A 4)
+Conteúdos: tríade HTML, CSS e JavaScript; execução do JavaScript; APIs no navegador.
+
+O que explicar:
+- HTML é a estrutura semântica e o esqueleto do documento.
+- CSS é a estilização visual, hierarquia e responsividade.
+- JavaScript controla o comportamento e a dinâmica da interface.
+- O JavaScript deste projeto é executado no navegador (client-side).
+- APIs são conjuntos de recursos que ampliam o JavaScript. DOM e localStorage são exemplos de APIs do navegador.
+
+Demonstração:
+1. Mostre o formulário e a lista (HTML).
+2. Mostre o visual e o tema claro/escuro (CSS).
+3. Cadastre uma tarefa e conclua-a (JavaScript).
+4. Explique que document.querySelector permite localizar elementos da página por meio da API DOM.
+
+Onde localizar:
+- index.html: form id="taskForm", div id="taskList".
+- style.css: .task-form, .task-item e body.dark-theme.
+- app.js: document.querySelector() e renderizarTarefas().
+
+Frase de apoio:
+“HTML organiza o conteúdo, CSS define sua aparência e JavaScript faz a interface reagir. O navegador oferece APIs, como o DOM, para o JavaScript acessar e modificar os elementos.”
+
+2. AMANDA — INCLUSÃO DE SCRIPTS E CARREGAMENTO (PÁGINAS 5 E 6)
+Conteúdos: script inline, interno e externo; padrão, async e defer.
+
+O que explicar:
+- Inline: código colocado diretamente em um atributo HTML, como onclick.
+- Interno: código dentro da tag script no HTML.
+- Externo: arquivo .js separado, referenciado pelo HTML.
+- Sem atributo, o script pode bloquear o parsing do HTML.
+- async executa assim que termina o download; a ordem não é garantida.
+- defer executa após o parsing do HTML e preserva a ordem dos scripts deferidos.
+
+Demonstração:
+1. Abra index.html e mostre a referência a app.js.
+2. Mostre que o estilo está em style.css e a lógica em app.js.
+3. Explique por que defer permite que os elementos HTML sejam processados antes da execução do JavaScript.
+
+Trecho usado:
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+
+Frase de apoio:
+“Separar os arquivos deixa o projeto mais organizado. Usamos defer porque o JavaScript precisa encontrar os elementos já declarados no HTML.”
+
+3. BRENO — VARIÁVEIS E LÓGICA (PÁGINAS 7 E 8)
+Conteúdos: const, let, var; igualdade estrita; operadores lógicos.
+
+O que explicar:
+- const impede reatribuição da variável.
+- let permite reatribuir o valor.
+- var é legado e deve ser evitado no padrão moderno apresentado.
+- === compara valor e tipo.
+- && significa E; || significa OU; ! significa NÃO.
+
+Demonstração:
+1. Cadastre duas tarefas.
+2. Use a busca e os filtros Todas, Pendentes e Concluídas.
+3. Explique como o sistema combina as condições para decidir quais tarefas exibir.
+
+Onde localizar:
+- app.js: let tasks, const tarefasFiltradas, correspondeAoStatus.
+
+Frase de apoio:
+“Usamos const para referências que não precisam ser reatribuídas e let para o estado que muda. Os operadores lógicos permitem combinar as condições do filtro.”
+
+4. MARCOS — FUNÇÕES E DOM (PÁGINAS 9 E 10)
+Conteúdos: funções declaradas, Arrow Functions e DOM; textContent versus innerHTML.
+
+O que explicar:
+- Funções agrupam instruções reutilizáveis.
+- A declaração tradicional utiliza function.
+- Arrow Functions usam a sintaxe => e são comuns em callbacks.
+- DOM é a representação estruturada do HTML na memória do navegador.
+- textContent insere texto sem interpretar marcação HTML; innerHTML interpreta HTML e exige cuidado com conteúdo não confiável.
+
+Demonstração:
+1. Cadastre e conclua uma tarefa.
+2. Observe a lista e o progresso mudarem sem recarregar a página.
+3. Mostre renderizarTarefas() e atualizarResumo.
+
+Onde localizar:
+- app.js: function renderizarTarefas(), const atualizarResumo = () =>, textContent.
+
+Frase de apoio:
+“O DOM é a ponte entre o JavaScript e a página. Quando o estado muda, as funções atualizam os elementos visíveis sem editar o arquivo HTML original.”
+
+5. LARI — CRIAÇÃO DE ELEMENTOS, ATRIBUTOS E EVENTOS (PÁGINAS 11 A 13)
+Conteúdos: querySelector, createElement, appendChild; getAttribute, setAttribute, hasAttribute, removeAttribute; addEventListener.
+
+O que explicar:
+- querySelector seleciona um elemento por seletor CSS.
+- createElement cria um novo nó HTML.
+- appendChild insere um nó dentro de outro.
+- getAttribute lê; setAttribute define/atualiza; hasAttribute verifica; removeAttribute remove.
+- addEventListener registra funções para responder a eventos como click, input, submit e change.
+
+Demonstração:
+1. Cadastre uma tarefa e observe sua criação.
+2. Clique em Concluir e depois em Concluída para reabrir.
+3. Exclua uma tarefa.
+4. Mostre a busca e o filtro.
+
+Onde localizar:
+- app.js: document.createElement(), appendChild(), setAttribute(), addEventListener().
+- A conclusão é tratada pelo evento de clique na lista, usando data-action="toggle".
+
+Frase de apoio:
+“A cada tarefa, criamos elementos dinamicamente. Os eventos escutam as ações da pessoa e atualizam o estado e a interface.”
+
+6. BRUNO — LOCALSTORAGE E BOAS PRÁTICAS (PÁGINAS 14 A 16)
+Conteúdos: localStorage; setItem e getItem; form.reset; sanitização com trim; preventDefault; referências técnicas.
+
+O que explicar:
+- localStorage armazena pares chave-valor no navegador.
+- setItem grava e getItem recupera.
+- Os dados são strings; JSON.stringify converte objetos/arrays em texto e JSON.parse recupera a estrutura.
+- trim remove espaços das extremidades.
+- preventDefault impede o comportamento padrão do formulário.
+- reset limpa os campos.
+- A validação no front-end melhora a experiência, mas não substitui validação no servidor em aplicações reais.
+
+Demonstração:
+1. Cadastre e conclua uma tarefa.
+2. Atualize a página (F5) e mostre que os dados continuam.
+3. Alterne o tema e atualize novamente.
+4. Explique que o armazenamento é local ao navegador e dispositivo usados.
+
+Onde localizar:
+- app.js: carregarTarefas(), salvarTarefas(), localStorage.setItem(), localStorage.getItem(), trim(), preventDefault(), reset().
+
+Referências indicadas no slide:
+- MDN Web Docs: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript
+- W3C Standards: https://www.w3.org/standards/
+- ECMA International / ECMAScript: https://tc39.es/ecma262/
+
+Frase de apoio:
+“O localStorage mantém os dados no navegador. Salvamos o array em JSON e o recuperamos quando a aplicação abre novamente.”
+
+SEQUÊNCIA SUGERIDA
+1. Ryan apresenta a visão geral e a tríade Web.
+2. Amanda explica como os arquivos são incluídos e carregados.
+3. Breno demonstra a busca e os filtros.
+4. Marcos explica as funções, DOM e atualização do progresso.
+5. Lari demonstra cadastro, conclusão, reabertura e exclusão.
+6. Bruno demonstra a persistência após atualizar a página e encerra com boas práticas e referências.
+
+DICAS
+- Deixem algumas tarefas cadastradas antes de iniciar.
+- Mostrem primeiro a funcionalidade e depois o trecho de código.
+- Não é necessário ler todas as linhas: foquem nas linhas que comprovam o conceito.
+- Usem o mesmo navegador durante a demonstração, pois o localStorage é específico daquele navegador.
+- Os trechos das abas são recortes didáticos. Para estudar o comportamento completo, consultem app.js.

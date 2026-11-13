@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Apresentação prática para demonstrar JavaScript, DOM, eventos e armazenamento local.">
+  <title>FATEC ID | Apresentação JavaScript</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="FATEC ID início"><span class="brand-mark">F</span><span>FATEC <span class="brand-accent">ID</span></span></a>
+    <div class="top-actions">
+      <span class="save-status" id="saveStatus">Seus dados ficam neste navegador</span>
+      <button class="icon-button" id="themeButton" type="button" aria-label="Alternar tema" title="Alternar tema">☾</button>
+    </div>
+  </header>
+
+  <main class="app-shell" id="inicio">
+    <section class="intro">
+      <div class="intro-copy">
+        <p class="eyebrow">DESENVOLVIMENTO WEB · HTML + CSS + JAVASCRIPT</p>
+        <h1>Organize seus estudos.<br><span>Entenda o código.</span></h1>
+        <p class="intro-text">O FATEC ID é um único projeto que reúne os conceitos da apresentação: estrutura, lógica, funções, DOM, eventos e persistência. Use a aplicação e explore as abas para acompanhar o código que faz cada parte funcionar.</p>
+      </div>
+      <div class="intro-card">
+        <span class="intro-card-label">SEU PROGRESSO</span>
+        <strong id="progressPercent">0%</strong>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <span id="progressText">0 de 0 tarefas concluídas</span>
+      </div>
+    </section>
+
+    <section class="workspace" aria-label="Gerenciador de tarefas">
+      <div class="section-heading">
+        <div><p class="eyebrow">PAINEL DE ORGANIZAÇÃO</p><h2>Minhas tarefas</h2></div>
+        <span class="task-count" id="taskCount">0 tarefas</span>
+      </div>
+
+      <form class="task-form" id="taskForm">
+        <label class="sr-only" for="taskName">Nome da tarefa</label>
+        <input id="taskName" name="taskName" type="text" maxlength="70" placeholder="Ex.: Revisar o conteúdo de JavaScript" required>
+        <label class="sr-only" for="taskPriority">Prioridade</label>
+        <select id="taskPriority" name="taskPriority">
+          <option value="normal">Normal</option>
+          <option value="alta">Alta</option>
+          <option value="baixa">Baixa</option>
+        </select>
+        <button class="primary-button" type="submit">＋ Adicionar tarefa</button>
+      </form>
+
+      <div class="task-tools">
+        <label class="search-box"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="Buscar tarefa..." aria-label="Buscar tarefa"></label>
+        <label class="filter-label" for="statusFilter">Exibir:</label>
+        <select id="statusFilter">
+          <option value="todas">Todas</option>
+          <option value="pendente">Pendentes</option>
+          <option value="concluida">Concluídas</option>
+        </select>
+        <button class="text-button" id="clearCompleted" type="button">Limpar concluídas</button>
+      </div>
+
+      <div class="task-list" id="taskList" aria-live="polite">
+        <p class="empty-state">Carregando suas tarefas...</p>
+      </div>
+      <p class="storage-note"><span class="status-dot"></span> Salvamento automático ativado com localStorage.</p>
+    </section>
+
+    <section class="presentation" id="apresentacao">
+      <div class="presentation-heading">
+        <div><p class="eyebrow">ROTEIRO DA APRESENTAÇÃO</p><h2>Como o projeto funciona?</h2></div>
+        <p>Selecione um integrante. A demonstração e o trecho de código correspondente aparecem juntos para facilitar a explicação.</p>
+      </div>
+
+      <div class="presenter-tabs" role="tablist" aria-label="Abas dos integrantes">
+        <button class="presenter-tab active" id="tab-ryan" role="tab" aria-selected="true" aria-controls="panel-ryan" data-tab="ryan"><span>01</span> Ryan</button>
+        <button class="presenter-tab" id="tab-amanda" role="tab" aria-selected="false" aria-controls="panel-amanda" data-tab="amanda"><span>02</span> Amanda</button>
+        <button class="presenter-tab" id="tab-breno" role="tab" aria-selected="false" aria-controls="panel-breno" data-tab="breno"><span>03</span> Breno</button>
+        <button class="presenter-tab" id="tab-marcos" role="tab" aria-selected="false" aria-controls="panel-marcos" data-tab="marcos"><span>04</span> Marcos</button>
+        <button class="presenter-tab" id="tab-lari" role="tab" aria-selected="false" aria-controls="panel-lari" data-tab="lari"><span>05</span> Lari</button>
+        <button class="presenter-tab" id="tab-bruno" role="tab" aria-selected="false" aria-controls="panel-bruno" data-tab="bruno"><span>06</span> Bruno</button>
+      </div>
+
+      <div class="presenter-panels">
+        <article class="presenter-panel active" id="panel-ryan" role="tabpanel" aria-labelledby="tab-ryan">
+          <div class="panel-intro"><div><span class="member-label">INTEGRANTE 01 · PÁGINAS 2 A 4</span><h3>Ryan — Fundamentos da Web</h3></div><span class="topic-pill">Tríade · execução · APIs</span></div>
+          <p class="panel-description">O FATEC ID combina as três tecnologias da Web. O HTML organiza os elementos, o CSS define a aparência e o JavaScript controla o comportamento. O navegador executa o JavaScript no lado do cliente e oferece APIs prontas para interagir com a página.</p>
+          <div class="demo-callout"><strong>Mostre na aplicação:</strong> adicione uma tarefa, altere o tema e observe a interface responder sem recarregar a página. Isso demonstra a interação entre estrutura, estilo e comportamento no navegador.</div>
+          <div class="code-card"><div class="code-title"><span>HTML · estrutura</span><button class="copy-code" type="button">Copiar código</button></div><pre><code>&lt;form id="taskForm"&gt;
+  &lt;input id="taskName" type="text" required&gt;
+  &lt;button type="submit"&gt;Adicionar tarefa&lt;/button&gt;
+&lt;/form&gt;
+&lt;ul id="taskList"&gt;&lt;/ul&gt;</code></pre></div>
+          <div class="code-card"><div class="code-title"><span>CSS · apresentação</span><button class="copy-code" type="button">Copiar código</button></div><pre><code>.task-form {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 14px;
+}</code></pre></div>
+          <div class="code-card"><div class="code-title"><span>JavaScript · comportamento e API do DOM</span><button class="copy-code" type="button">Copiar código</button></div><pre><code>const taskList = document.querySelector("#taskList");
+
+function mostrarAviso() {
+  taskList.textContent = "A interface foi atualizada!";
+}</code></pre></div>
+          <p class="speaker-tip"><strong>Explique:</strong> API significa uma interface que oferece recursos prontos. <code>document.querySelector()</code> é um recurso da API DOM do navegador. O JavaScript roda no navegador (client-side); não é necessário enviar cada clique ao servidor.</p>
+        </article>
+
+        <article class="presenter-panel" id="panel-amanda" role="tabpanel" aria-labelledby="tab-amanda" hidden>
+          <div class="panel-intro"><div><span class="member-label">INTEGRANTE 02 · PÁGINAS 5 E 6</span><h3>Amanda — Integração e carregamento</h3></div><span class="topic-pill">Scripts · async · defer</span></div>
+          <p class="panel-description">O projeto mantém HTML, CSS e JavaScript em arquivos separados. O arquivo JavaScript é incluído com <code>defer</code>, assim o navegador pode baixar o script enquanto interpreta o HTML e executá-lo depois que o documento for processado.</p>
+          <div class="demo-callout"><strong>Mostre na aplicação:</strong> abra a página e use o formulário. Explique que a lógica está no arquivo <code>app.js</code>, enquanto o visual está em <code>style.css</code>.</div>
+          <div class="code-card"><div class="code-title"><span>HTML · inclusão usada neste projeto</span><button class="copy-code" type="button">Copiar código</button></div><pre><code>&lt;link rel="stylesheet" href="style.css"&gt;
+&lt;script src="app.js" defer&gt;&lt;/script&gt;</code></pre></div>
+          <div class="code-card"><div class="code-title"><span>Comparação · padrão, async e defer</span><button class="copy-code" type="button">Copiar código</button></div><pre><code>&lt;!-- Padrão: pode bloquear o parsing do HTML --&gt;
+&lt;script src="arquivo.js"&gt;&lt;/script&gt;
+
+&lt;!-- async: executa assim que baixar; ordem não garantida --&gt;
+&lt;script src="arquivo.js" async&gt;&lt;/script&gt;
+
+&lt;!-- defer: executa após o parsing, mantendo a ordem --&gt;
+&lt;script src="app.js" defer&gt;&lt;/script&gt;</code></pre></div>
+          <p class="speaker-tip"><strong>Explique:</strong> <code>defer</code> é adequado aqui porque o JavaScript precisa localizar elementos que já estão descritos no HTML. <code>async</code> é mais indicado para scripts independentes, cuja ordem de execução não seja importante.</p>
+        </article>
+
+        <article class="presenter-panel" id="panel-breno" role="tabpanel" aria-labelledby="tab-breno" hidden>
+          <div class="panel-intro"><div><span class="member-label">INTEGRANTE 03 · PÁGINAS 7 E 8</span><h3>Breno — Variáveis e lógica</h3></div><span class="topic-pill">const · let · === · operadores</span></div>
+          <p class="panel-description">O sistema usa <code>const</code> para referências que não serão reatribuídas e <code>let</code> quando o valor precisa mudar. Também utiliza igualdade estrita e operadores lógicos para filtrar e validar tarefas.</p>
+          <div class="demo-callout"><strong>Mostre na aplicação:</strong> escreva parte do nome de uma tarefa na busca e alterne o filtro entre Todas, Pendentes e Concluídas. A lista muda conforme as condições definidas no JavaScript.</div>
+          <div class="code-card"><div class="code-title"><span>JavaScript · variáveis</span><button class="copy-code" type="button">Copiar código</button></div><pre><code>const taskName = document.querySelector("#taskName");
+const statusFilter = document.querySelector("#statusFilter");
+
+let tasks = [];
+
+tasks = [...tasks, { title: taskName.value }];</code></pre></div>
+          <div class="code-card"><div class="code-title"><span>JavaScript · igualdade e operadores lógicos</span><button class="copy-code" type="button">Copiar código</button></div><pre><code>const isCompleted = task.completed === true;
+const matchesStatus =
+  statusFilter.value === "todas" ||
+  (statusFilter.value === "concluida" && isCompleted) ||
+  (statusFilter.value === "pendente" && !isCompleted);</code></pre></div>
+          <p class="speaker-tip"><strong>Explique:</strong> <code>===</code> compara valor e tipo. <code>&&</code> significa E, <code>||</code> significa OU e <code>!</code> significa NÃO. <code>const</code> impede reatribuir a variável; <code>let</code> permite atribuir outro valor.</p>
+        </article>
+
+        <article class="presenter-panel" id="panel-marcos" role="tabpanel" aria-labelledby="tab-marcos" hidden>
+          <div class="panel-intro"><div><span class="member-label">INTEGRANTE 04 · PÁGINAS 9 E 10</span><h3>Marcos — Funções e DOM</h3></div><span class="topic-pill">function · arrow · DOM</span></div>
+          <p class="panel-description">As funções organizam tarefas do programa em blocos reutilizáveis. O DOM representa o HTML como uma árvore de objetos que o JavaScript pode consultar e modificar em tempo real.</p>
+          <div class="demo-callout"><strong>Mostre na aplicação:</strong> adicione ou conclua uma tarefa. O resumo de progresso e a lista são atualizados sem editar o arquivo HTML e sem recarregar a página.</div>
+          <div class="code-card"><div class="code-title"><span>JavaScript · declaração e arrow function</span><button class="copy-code" type="button">Copiar código</button></div><pre><code>function contarConcluidas(lista) {
+  return lista.filter((task) => task.completed).length;
+}
+
+const atualizarResumo = () => {
+  progressText.textContent = "Progresso atualizado";
+};</code></pre></div>
+          <div class="code-card"><div class="code-title"><span>JavaScript · manipulação do DOM</span><button class="copy-code" type="button">Copiar código</button></div><pre><code>const progressText = document.querySelector("#progressText");
+
+progressText.textContent = "Tarefas concluídas: 2";
+
+// textContent insere texto; innerHTML interpreta marcação HTML.
+progressText.textContent = "Você está evoluindo!";</code></pre></div>
+          <p class="speaker-tip"><strong>Explique:</strong> a função tradicional é declarada com <code>function</code>; a Arrow Function usa <code>=&gt;</code>. O DOM é a ponte entre JavaScript e HTML. <code>textContent</code> insere texto sem interpretar tags HTML, sendo uma opção segura para conteúdo digitado pelo usuário.</p>
+        </article>
+
+        <article class="presenter-panel" id="panel-lari" role="tabpanel" aria-labelledby="tab-lari" hidden>
+          <div class="panel-intro"><div><span class="member-label">INTEGRANTE 05 · PÁGINAS 11 A 13</span><h3>Lari — Elementos, atributos e eventos</h3></div><span class="topic-pill">createElement · atributos · eventos</span></div>
+          <p class="panel-description">Quando uma tarefa é adicionada, o JavaScript cria elementos HTML, define seu conteúdo e os insere na lista. Os botões de concluir e excluir respondem a eventos. A interface também pode ler e alterar atributos dos elementos.</p>
+          <div class="demo-callout"><strong>Mostre na aplicação:</strong> adicione uma tarefa, marque-a como concluída e depois exclua-a. Acompanhe como os elementos aparecem e desaparecem na lista.</div>
+          <div class="code-card"><div class="code-title"><span>JavaScript · selecionar, criar e inserir</span><button class="copy-code" type="button">Copiar código</button></div><pre><code>const taskList = document.querySelector("#taskList");
+const item = document.createElement("li");
+
+item.textContent = "Estudar DOM";
+taskList.appendChild(item);</code></pre></div>
+          <div class="code-card"><div class="code-title"><span>JavaScript · atributos</span><button class="copy-code" type="button">Copiar código</button></div><pre><code>button.setAttribute("aria-label", "Concluir tarefa");
+const label = button.getAttribute("aria-label");
+const exists = button.hasAttribute("aria-label");
+button.removeAttribute("title");</code></pre></div>
+          <div class="code-card"><div class="code-title"><span>JavaScript · eventos</span><button class="copy-code" type="button">Copiar código</button></div><pre><code>taskForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  // validar os dados e adicionar a tarefa
+});
+
+taskList.addEventListener("click", (event) => {
+  // identificar o botão acionado
+});</code></pre></div>
+          <p class="speaker-tip"><strong>Explique:</strong> <code>querySelector</code> seleciona; <code>createElement</code> cria; <code>appendChild</code> insere. Os métodos de atributo consultam, definem, verificam e removem atributos. <code>addEventListener</code> escuta eventos como click, input, submit e change.</p>
+        </article>
+
+        <article class="presenter-panel" id="panel-bruno" role="tabpanel" aria-labelledby="tab-bruno" hidden>
+          <div class="panel-intro"><div><span class="member-label">INTEGRANTE 06 · PÁGINAS 14 A 16</span><h3>Bruno — Persistência e boas práticas</h3></div><span class="topic-pill">localStorage · validação · referências</span></div>
+          <p class="panel-description">As tarefas são salvas no localStorage para permanecerem disponíveis quando a página for fechada e aberta novamente no mesmo navegador. O projeto também utiliza trim, preventDefault, reset e atualização de classes para organizar o código e a interface.</p>
+          <div class="demo-callout"><strong>Mostre na aplicação:</strong> adicione uma tarefa, atualize a página e observe que ela continua na lista. Depois altere o tema e veja que a preferência também é mantida.</div>
+          <div class="code-card"><div class="code-title"><span>JavaScript · localStorage</span><button class="copy-code" type="button">Copiar código</button></div><pre><code>function salvarTarefas() {
+  localStorage.setItem("fatecid-tasks", JSON.stringify(tasks));
+}
+
+function carregarTarefas() {
+  const saved = localStorage.getItem("fatecid-tasks");
+  return saved ? JSON.parse(saved) : [];
+}</code></pre></div>
+          <div class="code-card"><div class="code-title"><span>JavaScript · validação e boas práticas</span><button class="copy-code" type="button">Copiar código</button></div><pre><code>taskForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const title = taskName.value.trim();
+  if (title === "") return;
+
+  // adicionar a tarefa...
+  taskForm.reset();
+});</code></pre></div>
+          <p class="speaker-tip"><strong>Explique:</strong> localStorage guarda strings; por isso usamos <code>JSON.stringify()</code> para salvar arrays/objetos e <code>JSON.parse()</code> para recuperá-los. <code>trim()</code> remove espaços nas extremidades, <code>preventDefault()</code> impede o envio tradicional do formulário e <code>reset()</code> limpa os campos.</p>
+          <div class="reference-links"><strong>Referências do conteúdo:</strong><a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript" target="_blank" rel="noopener">MDN Web Docs</a><a href="https://www.w3.org/standards/" target="_blank" rel="noopener">W3C Standards</a><a href="https://tc39.es/ecma262/" target="_blank" rel="noopener">ECMA International — ECMAScript</a></div>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer><strong>FATEC ID</strong> · Projeto acadêmico de Desenvolvimento Web · HTML, CSS e JavaScript</footer>
+</body>
+</html>
